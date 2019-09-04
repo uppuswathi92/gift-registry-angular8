@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistryUserServiceService } from '../service/registry-user-service.service';
+import { RegistryUserService } from '../service/registry-user.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class RegistryUserComponent implements OnInit {
   users:string[];
    
   constructor(
-    private registryUserService:RegistryUserServiceService
+    private registryUserService:RegistryUserService
   ) { }
 
   ngOnInit() {

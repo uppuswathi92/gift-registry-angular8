@@ -1,2 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 @import url(https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css)
+
+button{
+	background-color:#6c757d !important;
+}
+.spinner{
+	position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.8;
+    z-index: 998;
+    height: 100%;
+    width: 100%;
+}
+.loader{
+	position: absolute;
+    top: 325px;
+}
+.color-red{
+	color: #c21010;
+}
+.margin-top-10{
+	margin-top:10px;
+}
+a{
+	text-decoration: none !important;
+}
+.btn-link{
+	text-decoration: none !important;
+}
+

@@ -1,0 +1,26 @@
+.my-events{
+	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card-body{
+	padding:5px !important;
+}
+.event-details{
+	margin-bottom:10px;
+}
+.create-event-link{
+	text-decoration:none;
+	color:#6c757d !important;
+}
+.link-style{
+	background-color:#6c757d !important;
+	border-color:#6c757d !important;
+}
+.float-right{
+	float:right;
+}
+.add-event{
+	margin:230px;
+}

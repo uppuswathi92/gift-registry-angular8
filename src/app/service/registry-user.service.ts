@@ -15,7 +15,7 @@ export class RegistryUser{
 @Injectable({
   providedIn: 'root'
 })
-export class RegistryUserServiceService {
+export class RegistryUserService {
 
   constructor(
     private httpClient:HttpClient
@@ -25,7 +25,7 @@ export class RegistryUserServiceService {
   {
     console.log("test call");
     //return this.httpClient.get<RegistryUser[]>('http://localhost:8080/giftregistry');
-	return this.httpClient.get<RegistryUser>('http://localhost:8080/giftregistry/user1/please');
+	return this.httpClient.get<Object>('http://localhost:8080/giftregistry');
   }
   public addUser(user) {
     return this.httpClient.post<RegistryUser>("http://localhost:8080/giftregistry", user);

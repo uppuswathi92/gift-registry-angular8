@@ -23,7 +23,7 @@ export class AuthenticationService {
 
      public authenticate(username, password) 
   {
-    return this.httpClient.get<Boolean>('http://localhost:8080/giftregistry/'+username+"/"+password);
+    return this.httpClient.get<Object>('http://localhost:8080/giftregistry/'+username+"/"+password);
   }
   
    isUserLoggedIn() {
@@ -35,4 +35,5 @@ export class AuthenticationService {
    logOut() {
     sessionStorage.removeItem('username')
   }
+  
 }

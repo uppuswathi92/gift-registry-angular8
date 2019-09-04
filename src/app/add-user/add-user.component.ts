@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistryUserServiceService, RegistryUser } from '../service/registry-user-service.service';
+import { RegistryUserService, RegistryUser } from '../service/registry-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  styleUrls: ['./add-user.component.css', '../../form-style.css']
 })
 export class AddUserComponent implements OnInit {
 
   user: RegistryUser = new RegistryUser("","","","","","");
   userExists: Boolean = false;
   submitted: Boolean = false;
+  displaySpinner: Boolean = false;
   constructor(
-    private httpClientService: RegistryUserServiceService
+    private httpClientService: RegistryUserService, private router: Router
   ) { }
 
   ngOnInit() {
@@ -20,6 +22,7 @@ export class AddUserComponent implements OnInit {
   }
 	addUser(): void {
 		this.submitted = true;
+		this.displaySpinner = true;
 		//this.httpClientService.addUser(this.user)
 			//.subscribe( data => {
 			  //alert("User created successfully.");
@@ -32,6 +35,9 @@ export class AddUserComponent implements OnInit {
 	{
 		if(response === "user exists"){
 			this.userExists = true;
+		}else{
+			this.displaySpinner = false;
+			this.router.navigate(["login"], { queryParams: { status: "registered" } });
 		}
 	}
 }

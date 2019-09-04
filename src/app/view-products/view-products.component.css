@@ -1,0 +1,41 @@
+.float-right{
+	float:right !important;
+}
+.view-products{
+	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	margin-bottom:100px;
+}
+
+.product-details{
+	margin-bottom:10px;
+	box-sizing: border-box;
+	border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.update-product{
+	float: right;
+    position: absolute;
+    left: 659px;
+    top: 20px;
+}
+.accordion>.card .card-header{
+	padding:0px !important;
+}
+.add-product{
+	margin:230px;
+}
+.product-link{
+	max-width: 50px;
+	white-space: nowrap;
+	overflow: hidden;
+	padding: 5px;
+	text-overflow: ellipsis(...)
+}
+.update-product .bs-popover-left{width: 250px !important;left: -159px !important;}
+a.disabled {
+    color: gray;
+    cursor: not-allowed;
+    text-decoration: underline;
+}

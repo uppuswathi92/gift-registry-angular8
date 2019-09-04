@@ -1,0 +1,9 @@
+npm install -g @angular/cli
+ng new employee-management -- project
+ng generate component add-employee
+ng generate service service/authGaurd
+ng serve
+
+npm install --save font-awesome
+npm install ng2-file-upload --save
+

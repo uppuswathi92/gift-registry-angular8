@@ -1,0 +1,61 @@
+<style>
+.update-product .popover{width: 250px !important;left: -159px !important;}
+</style>
+<h2 class="text-center">View Products</h2>
+<div class="add-product" *ngIf="products && products.length == 0"><a href="javascript:void(0)" (click)=addProduct()>No products have been added yet. Click here to add a product!</a></div>
+<a href="javascript:void(0)" (click)=addProduct() class="create-event-link" *ngIf="products && products.length > 0">Click here to add new product</a>
+<div class="view-products">
+<div class="col-md-6">
+<div *ngFor="let product of products" class="product-details">
+<ngb-accordion [closeOthers]="true" activeIds="static-1">
+  <ngb-panel id="static-1" title="{{product.productName}}">
+  
+  <ng-template ngbPanelTitle>
+             <div class="update-product">
+			 <a *ngIf="product && !product.purchased"  href="addproduct?productId={{product.productId}}"><i class="fas fa-pencil-alt"></i></a>
+ <a *ngIf="product && product.purchased"  [class.disabled]="true" placement="left" ngbPopover="You cannot edit this products as it has already been purchased" triggers="mouseenter:mouseleave" href="addproduct?productId={{product.productId}}"><i class="fas fa-pencil-alt"></i></a>
+			 &nbsp;&nbsp;
+	<a [class.disabled]="true" *ngIf="product && product.purchased" placement="left" ngbPopover="You cannot delete this products as it has already been purchased" triggers="mouseenter:mouseleave"><i class="fas fa-trash-alt"></i></a>
+	<a  href="javascript:void(0)" *ngIf="product && !product.purchased" (click)="deleteProduct(content,product)"><i class="fas fa-trash-alt"></i>
+
+</a> </div>
+        </ng-template>
+    <ng-template ngbPanelContent>
+	<!--<a href="addproduct?productId={{product.productId}}" class="btn btn-default float-right">
+          <span class="glyphicon glyphicon-pencil"></span>Edit
+        </a>-->
+      <!--<div> Product Link: {{product.productLink}}</div>-->
+	  <div> Product Link: <a href="{{product.productLink}}" target="_black">{{ product.productLink | slice:0:40 }}{{ product.productLink.length > 20 ? '...' : ''}} </a></div>
+	  <div> Product Color: {{product.productColor}}</div>
+	  <div> Purchased?: {{!product.purchased ? 'Not yet' : 'Yup'}}</div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+</div>
+</div>
+<div *ngIf="displaySpinner" class="text-center spinner">
+  <div class="spinner-border text-info loader" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete Event</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <div> Do you really want to delete {{currentProduct.productName}}?</div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="deleteCurrentProduct()">Yes</button>
+  </div>
+</ng-template>

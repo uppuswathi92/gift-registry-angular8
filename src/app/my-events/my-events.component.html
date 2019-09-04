@@ -1,1 +1,60 @@
-<p>my-events works!</p>
+<div class="alert alert-primary" role="alert" *ngIf="notifications">
+  You have been invited to {{numberOfNotifications}} new <span *ngIf="numberOfNotifications > 1">events </span> <span *ngIf="numberOfNotifications == 1">event</span> <a href="otherevents"> Click here to check it out</a>	 !
+</div>
+<div class="col-md-12">
+
+</div>
+<div class="my-events">
+
+	<div class="col-md-6">
+	<h2 class="text-center">My Events</h2>
+	<div class="add-event" *ngIf="events && events.length==0"><a href="addevent">No events have been added yet. Click here to add an event!</a></div>
+	<a href="addevent" class="create-event-link" *ngIf="events &&  events.length>0">Click here to create new event</a>
+	
+	<div *ngFor="let event of events" class="event-details">
+	
+<div class="card">
+  <div class="card-header">
+    {{event.eventName}} <div class="float-right"><a  href="addevent?eventId={{event.eventId}}"><i class="fas fa-pencil-alt"></i></a> &nbsp;&nbsp;
+	<a href="javascript:void(0)" (click)="deleteEvent(content, event)"><i class="fas fa-trash-alt"></i>
+
+</a></div>
+
+
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{event.eventDate}}</h5>
+    <a href="viewevent?eventId={{event.eventId}}" class="btn btn-primary link-style">Click here for details</a>
+  </div>
+  </div>
+  
+</div>
+</div>
+<div *ngIf="displaySpinner" class="text-center spinner">
+  <div class="spinner-border text-info loader" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete Event</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <div> Do you really want to delete {{currentEvent.eventName}}?</div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="deleteCurrentEvent()">Yes</button>
+  </div>
+</ng-template>
