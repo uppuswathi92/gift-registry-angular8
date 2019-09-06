@@ -21,7 +21,6 @@ import { ViewEventComponent } from './view-event/view-event.component';
 import { AddProductsComponent } from './add-products/add-products.component';
 import { AddInviteesComponent } from './add-invitees/add-invitees.component';
 import { ViewProductsComponent } from './view-products/view-products.component';
-import { EditProductComponent } from './edit-product/edit-product.component';
 import { OtherEventsComponent } from './other-events/other-events.component';
 import { PurchaseProductComponent } from './purchase-product/purchase-product.component';
 import { FileTestComponent } from './file-test/file-test.component';
@@ -41,7 +40,6 @@ import { FileTestComponent } from './file-test/file-test.component';
     AddProductsComponent,
     AddInviteesComponent,
     ViewProductsComponent,
-    EditProductComponent,
     OtherEventsComponent,
     PurchaseProductComponent,
     FileTestComponent,

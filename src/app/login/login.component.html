@@ -1,39 +1,39 @@
 <div class="alert alert-success" role="alert" *ngIf="registered">You have successfully registered. Please login to continue!</div>
 <div class="container">
 
-<h2>Login</h2>
-  <!--<div>
+    <h2>Login</h2>
+    <!--<div>
     User Name : <input type="text" name="username" [(ngModel)]="username">
     Password : <input type="password" name="password" [(ngModel)]="password">
   </div>
   <button (click)=checkLogin() class="btn btn-success">
     Login
   </button>-->
-  
-  <div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
 
-    <!-- Icon -->
-    <div class="fadeIn first">
-      <i class="fas fa-user fa-3x"></i>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <i class="fas fa-user fa-3x"></i>
+            </div>
+
+            <!-- Login Form -->
+            <form>
+                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login" [(ngModel)]="username">
+                <div><span class="color-red" *ngIf="submitted && !username"><i class="fas fa-exclamation-circle"></i> Please enter username</span></div>
+                <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password" [(ngModel)]="password">
+                <div><span class="color-red" *ngIf="submitted && !password"><i class="fas fa-exclamation-circle"></i> Please enter password</span></div>
+                <div><span class="color-red" *ngIf="username && password && invalidLogin"><i class="fas fa-exclamation-circle"></i> Username/Password is incorrect</span></div>
+                <input type="button" (click)=checkLogin() class="fadeIn fourth" value="Log In">
+            </form>
+
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="/registration">Not registered yet? Click here to register!</a>
+            </div>
+
+        </div>
     </div>
-
-    <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login" [(ngModel)]="username">
-	  <div><span class="color-red" *ngIf="submitted && !username"><i class="fas fa-exclamation-circle"></i> Please enter username</span></div>
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password" [(ngModel)]="password">
-	  <div><span class="color-red" *ngIf="submitted && !password"><i class="fas fa-exclamation-circle"></i> Please enter password</span></div>
-	  <div><span class="color-red" *ngIf="username && password && invalidLogin"><i class="fas fa-exclamation-circle"></i> Username/Password is incorrect</span></div>
-      <input type="button" (click)=checkLogin() class="fadeIn fourth" value="Log In">
-    </form>
-
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" href="/registration">Not registered yet? Click here to register!</a>
-    </div>
-
-  </div>
-</div>
 </div>

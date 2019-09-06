@@ -1,16 +1,26 @@
 <header>
-  <nav class ="navbar navbar-expand-md navbar-dark bg-dark">
-  <div><a href="" class="navbar-brand">Gift Registry</a></div>
-  
-  <ul class="navbar-nav">
-    <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/myevents" class="nav-link">My Events</a></li>
-	<li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/registration" class="nav-link">Registration</a></li>
-   <li><a href="javascript:void(0)" *ngIf="loginService.isUserLoggedIn()" (click)="redirectOtherEvents()" class="nav-link">Other Events
-	</a></li>
-  <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
-    <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
-  </ul>
-  
-  </nav>
-  
-  </header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div><a href="" class="navbar-brand">Gift Registry</a></div>
+
+        <ul class="navbar-nav">
+            <li>
+				<a *ngIf="loginService.isUserLoggedIn()" routerLink="/myevents" class="nav-link">My Events</a>
+			</li>
+            <li>
+				<a *ngIf="!loginService.isUserLoggedIn()" routerLink="/registration" class="nav-link">Registration</a>
+			</li>
+            <li>
+				<a href="javascript:void(0)" *ngIf="loginService.isUserLoggedIn()" (click)="redirectOtherEvents()" class="nav-link">Other Events
+                </a>
+			</li>
+            <li>
+				<a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a>
+			</li>
+            <li>
+				<a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a>
+			</li>
+        </ul>
+
+    </nav>
+
+</header>

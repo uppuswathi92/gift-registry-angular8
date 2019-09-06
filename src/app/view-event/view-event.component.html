@@ -1,58 +1,58 @@
 <h2 class="text-center">View Event</h2>
 <div class="container">
-  <div class="row">
-    <div class="col-sm">
-      Event Name
+    <div class="row">
+        <div class="col-sm">
+            Event Name
+        </div>
+        <div class="col-sm">
+            <span *ngIf="events">{{events.eventName}}</span>
+        </div>
     </div>
-    <div class="col-sm">
-      <span *ngIf="events">{{events.eventName}}</span>
+    <div class="row">
+        <div class="col-sm">
+            Event Address
+        </div>
+        <div class="col-sm">
+            <span *ngIf="events">{{events.eventAddress}}</span>
+        </div>
     </div>
-  </div>
-   <div class="row">
-    <div class="col-sm">
-      Event Address
+    <div class="row">
+        <div class="col-sm">
+            Event Date
+        </div>
+        <div class="col-sm">
+            <span *ngIf="events">{{events.eventDate}}</span>
+        </div>
     </div>
-    <div class="col-sm">
-      <span *ngIf="events">{{events.eventAddress}}</span>
+    <div class="row">
+        <div class="col-sm">
+            Event Message
+        </div>
+        <div class="col-sm">
+            <span *ngIf="events">{{events.eventMsg}}</span>
+        </div>
     </div>
-  </div>
-   <div class="row">
-    <div class="col-sm">
-      Event Date
-    </div>
-    <div class="col-sm">
-      <span *ngIf="events">{{events.eventDate}}</span>
-    </div>
-  </div>
-   <div class="row">
-    <div class="col-sm">
-      Event Message
-    </div>
-    <div class="col-sm">
-      <span *ngIf="events">{{events.eventMsg}}</span>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm" *ngIf="!isOtherEvent">
-	 <a href="addproduct?eventId={{eventId}}"  class="btn btn-primary link-style">Add Products</a>
-    <!--<button class="btn btn-primary">Add Products</button>-->
-    </div>
-	 <div class="col-sm" *ngIf="!isOtherEvent">
-	 <a href="viewproduct?eventId={{eventId}}" class="btn btn-primary link-style">View Products</a>
-    <!--<button class="btn btn-primary">Add Products</button>-->
-    </div>
-	 <div class="col-sm" *ngIf="isOtherEvent">
-	 <a href="purchaseproduct?eventId={{eventId}}" class="btn btn-primary link-style">View Products</a>
-    <!--<button class="btn btn-primary">Add Products</button>-->
-    </div>
-    <!--<div class="col-sm">
+    <div class="row">
+        <div class="col-sm" *ngIf="!isOtherEvent">
+            <a href="addproduct?eventId={{eventId}}" class="btn btn-primary link-style">Add Products</a>
+            <!--<button class="btn btn-primary">Add Products</button>-->
+        </div>
+        <div class="col-sm" *ngIf="!isOtherEvent">
+            <a href="viewproduct?eventId={{eventId}}" class="btn btn-primary link-style">View Products</a>
+            <!--<button class="btn btn-primary">Add Products</button>-->
+        </div>
+        <div class="col-sm" *ngIf="isOtherEvent">
+            <a href="purchaseproduct?eventId={{eventId}}" class="btn btn-primary link-style">View Products</a>
+            <!--<button class="btn btn-primary">Add Products</button>-->
+        </div>
+        <!--<div class="col-sm">
 	<a href="addevent?eventId={{eventId}}" *ngIf="!isOtherEvent" class="btn btn-primary link-style">Update Event</a>
     </div>-->
-	<div class="col-sm" *ngIf="!isOtherEvent">
-      <a href="addinvitees?eventId={{eventId}}" class="btn btn-primary link-style">Add Invitees</a>
-    </div>
-	<!--<div class="col-sm">
+        <div class="col-sm" *ngIf="!isOtherEvent">
+            <a href="addinvitees?eventId={{eventId}}" class="btn btn-primary link-style">Add Invitees</a>
+        </div>
+        <!--<div class="col-sm">
       <a href="addinvitees?eventId={{eventId}}" *ngIf="!isOtherEvent" class="btn btn-primary link-style">Delete Event</a>
     </div>-->
-  </div>
+    </div>
 </div>

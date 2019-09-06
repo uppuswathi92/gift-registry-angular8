@@ -1,39 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-export class RegistryUser{
-  constructor(
-    public username:string,
-    public password:string,
-    public firstName:string,
-    public lastName:string,
-	public email:string,
-	public phoneNumber:string
-  ) {}
+export class RegistryUser {
+    constructor(
+        public username: string,
+        public password: string,
+        public firstName: string,
+        public lastName: string,
+        public email: string,
+        public phoneNumber: string
+    ) {}
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor(
-    private httpClient:HttpClient
-  ) {}
+    constructor(
+        private httpClient: HttpClient
+    ) {}
 
-     public authenticate(username, password) 
-  {
-    return this.httpClient.get<Object>('http://localhost:8080/giftregistry/'+username+"/"+password);
-  }
-  
-   isUserLoggedIn() {
-    let user = sessionStorage.getItem('username')
-    //console.log(!(user === null))
-    return !(user === null)
-  }
+    public authenticate(username, password) {
+        return this.httpClient.get < Object > ('http://localhost:8080/giftregistry/' + username + "/" + password);
+    }
 
-   logOut() {
-    sessionStorage.removeItem('username')
-  }
-  
+    isUserLoggedIn() {
+        let user = localStorage.getItem('username');
+        //console.log(!(user === null))
+		//console.log(localStorage.getItem('username'));
+        return !(user === null)
+    }
+
+    logOut() {
+        localStorage.removeItem('username')
+    }
+
 }

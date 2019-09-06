@@ -1,43 +1,43 @@
 <div class="col-md-12">
-<div class="alert alert-danger" role="alert" *ngIf="submitted && (!user.username || !user.password || !confirmPassword || !user.firstName || !user.lastName || !user.email || !user.phoneNumber)">Please enter all fields!</div>
-<div class="alert alert-danger" *ngIf="submitted && userExists" role="alert">An account already exists with this username or email!</div>
+    <div class="alert alert-danger" role="alert" *ngIf="submitted && (!user.username || !user.password || !confirmPassword || !user.firstName || !user.lastName || !user.email || !user.phoneNumber)">Please enter all fields!</div>
+    <div class="alert alert-danger" *ngIf="submitted && userExists" role="alert">An account already exists with this username or email!</div>
 </div>
 <div class="col-md-12">
-<h2 class="text-center">Registration</h2>
-
-<form>
-  <div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
-
-    <!-- Icon -->
-    <div class="fadeIn first">
-      <i class="fas fa-user-plus fa-3x"></i>
-    </div>
+    <h2 class="text-center">Registration</h2>
 
     <form>
-      <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username" [(ngModel)]="user.username"/>
-	  <div><span class="color-red" *ngIf="submitted && !user.username"><i class="fas fa-exclamation-circle"></i> Please enter username</span></div>
-      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password" [(ngModel)]="user.password"/>
-	   <div><span class="color-red" *ngIf="submitted && !user.password"><i class="fas fa-exclamation-circle"></i> Please enter password</span></div>
-	  <input type="password" id="password" class="fadeIn third" name="confirmPassword" placeholder="Confirm Password" [(ngModel)]="confirmPassword"/>
-	  <div><span class="color-red" *ngIf="submitted && !confirmPassword"><i class="fas fa-exclamation-circle"></i> Please confirm password</span></div>
-	  <div><span class="color-red" *ngIf="submitted && confirmPassword && user.password != confirmPassword"><i class="fas fa-exclamation-circle"></i> The password you entered do not match</span></div>
-	   <input type="text" id="firstname" class="fadeIn third" name="firstName" placeholder="First Name" [(ngModel)]="user.firstName"/>
-	   <div><span class="color-red" *ngIf="submitted && !user.firstName"><i class="fas fa-exclamation-circle"></i> Please enter first name</span></div>
-	    <input type="text" id="lastName" class="fadeIn third" name="lastName" placeholder="Last Name" [(ngModel)]="user.lastName"/>
-		<div><span class="color-red" *ngIf="submitted && !user.lastName"><i class="fas fa-exclamation-circle"></i> Please enter last name</span></div>
-		<input type="text" id="email" class="fadeIn third" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #contactemail="ngModel" name="email" placeholder="Email Address" [(ngModel)]="user.email" />
-		<div><span class="color-red" *ngIf="submitted && !user.email"><i class="fas fa-exclamation-circle"></i> Please enter email address</span></div>
-		<div><span class="color-red" *ngIf="contactemail.errors && contactemail.errors.pattern"><i class="fas fa-exclamation-circle"></i> Please enter valid email address</span></div>
-		<input type="text" id="phoneNumber" class="fadeIn third" name="phoneNumber" placeholder="Phone Number" [(ngModel)]="user.phoneNumber"/>
-		<div><span class="color-red" *ngIf="submitted && !user.phoneNumber"><i class="fas fa-exclamation-circle"></i> Please enter phone number</span></div>
-      <input type="button" (click)=addUser() class="fadeIn fourth" value="Register">
-    </form>
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <!-- Tabs Titles -->
 
-  </div>
-</div>
- <!-- <div class="form-group">
+                <!-- Icon -->
+                <div class="fadeIn first">
+                    <i class="fas fa-user-plus fa-3x"></i>
+                </div>
+
+                <form>
+                    <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username" [(ngModel)]="user.username" />
+                    <div><span class="color-red" *ngIf="submitted && !user.username"><i class="fas fa-exclamation-circle"></i> Please enter username</span></div>
+                    <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password" [(ngModel)]="user.password" />
+                    <div><span class="color-red" *ngIf="submitted && !user.password"><i class="fas fa-exclamation-circle"></i> Please enter password</span></div>
+                    <input type="password" id="password" class="fadeIn third" name="confirmPassword" placeholder="Confirm Password" [(ngModel)]="confirmPassword" />
+                    <div><span class="color-red" *ngIf="submitted && !confirmPassword"><i class="fas fa-exclamation-circle"></i> Please confirm password</span></div>
+                    <div><span class="color-red" *ngIf="submitted && confirmPassword && user.password != confirmPassword"><i class="fas fa-exclamation-circle"></i> The password you entered do not match</span></div>
+                    <input type="text" id="firstname" class="fadeIn third" name="firstName" placeholder="First Name" [(ngModel)]="user.firstName" />
+                    <div><span class="color-red" *ngIf="submitted && !user.firstName"><i class="fas fa-exclamation-circle"></i> Please enter first name</span></div>
+                    <input type="text" id="lastName" class="fadeIn third" name="lastName" placeholder="Last Name" [(ngModel)]="user.lastName" />
+                    <div><span class="color-red" *ngIf="submitted && !user.lastName"><i class="fas fa-exclamation-circle"></i> Please enter last name</span></div>
+                    <input type="text" id="email" class="fadeIn third" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #contactemail="ngModel" name="email" placeholder="Email Address" [(ngModel)]="user.email" />
+                    <div><span class="color-red" *ngIf="submitted && !user.email"><i class="fas fa-exclamation-circle"></i> Please enter email address</span></div>
+                    <div><span class="color-red" *ngIf="contactemail.errors && contactemail.errors.pattern"><i class="fas fa-exclamation-circle"></i> Please enter valid email address</span></div>
+                    <input type="text" id="phoneNumber" class="fadeIn third" name="phoneNumber" placeholder="Phone Number" [(ngModel)]="user.phoneNumber" />
+                    <div><span class="color-red" *ngIf="submitted && !user.phoneNumber"><i class="fas fa-exclamation-circle"></i> Please enter phone number</span></div>
+                    <input type="button" (click)=addUser() class="fadeIn fourth" value="Register">
+                </form>
+
+            </div>
+        </div>
+        <!-- <div class="form-group">
     <label for="username">Username:</label>
     <input type="name" [(ngModel)]="user.username" placeholder="Username" name="username" class="form-control" id="username">
 	<span *ngIf="submitted && !user.username">Please enter username</span>
@@ -75,10 +75,10 @@
 		<span *ngIf="submitted && !user.phoneNumber">Please enter phone number</span>
 	</div>
   <button class="btn btn-success" (click)="addUser()">Register</button>-->
-</form>
+    </form>
 </div>
 <div *ngIf="displaySpinner" class="text-center spinner">
-  <div class="spinner-border text-info loader" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
+    <div class="spinner-border text-info loader" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
 </div>

@@ -14,8 +14,8 @@ events:string[];
   private datePipe: DatePipe) { }
 
   ngOnInit() {
-	  //String username = sessionStorage.getItem('username');
-	  this.eventsService.getOtherEvents(sessionStorage.getItem('username')).subscribe(
+	  //String username = localStorage.getItem('username');
+	  this.eventsService.getOtherEvents(localStorage.getItem('username')).subscribe(
      response =>this.handleSuccessfulResponse(response),
     );
 	 this.eventsService.updateNotification().subscribe(
