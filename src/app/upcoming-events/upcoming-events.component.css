@@ -1,0 +1,11 @@
+.my-events{
+	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.user-host{
+	position: absolute;
+    left: 14px;
+    top: 13px;
+}

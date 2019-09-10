@@ -7,7 +7,8 @@ export class Events {
         public eventAddress: string,
         public eventDate: string,
         public username: string,
-        public eventMsg: string
+        public eventMsg: string,
+		public host: Boolean
     ) {}
 }
 
@@ -66,6 +67,18 @@ export class EventsService {
     }
     public updateNotification() {
         return this.httpClient.post < Object > ("http://localhost:8080/events/updateNotification", localStorage.getItem('username'));
+    }
+	public getRsvp(eventId) {
+        return this.httpClient.get < Object > ('http://localhost:8080/events/getRsvp/' +eventId +"/"+ localStorage.getItem('username'));
+    }
+	public updateRsvp(eventId,status) {
+        return this.httpClient.post < Object > ('http://localhost:8080/events/updateRsvp/' +eventId +"/"+ localStorage.getItem('username') + "/" + status,{});
+    }
+	public getUpcomingEvents() {
+        return this.httpClient.get < Object > ('http://localhost:8080/events/getUpcomingEvents/' + localStorage.getItem('username'));
+    }
+	public getLatLng(address) {
+        return this.httpClient.get < Object > ('https://maps.googleapis.com/maps/api/geocode/json?address=' + address+'&key=AIzaSyCAgN2y10wHJCPc8VYAkGzjhaZCrsb3u44');
     }
     public numberOfNotifications() {
         this.notifications = 0;

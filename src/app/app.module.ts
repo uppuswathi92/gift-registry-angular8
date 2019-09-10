@@ -24,7 +24,10 @@ import { ViewProductsComponent } from './view-products/view-products.component';
 import { OtherEventsComponent } from './other-events/other-events.component';
 import { PurchaseProductComponent } from './purchase-product/purchase-product.component';
 import { FileTestComponent } from './file-test/file-test.component';
-
+import { UpcomingEventsComponent } from './upcoming-events/upcoming-events.component';
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
+import { EventLocationComponent } from './event-location/event-location.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,9 +46,16 @@ import { FileTestComponent } from './file-test/file-test.component';
     OtherEventsComponent,
     PurchaseProductComponent,
     FileTestComponent,
+    UpcomingEventsComponent,
+    EventLocationComponent,
   ],
   imports: [
     BrowserModule,
+	AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCG59Hss9r5APBVC0bL-Kz9oQf5Qdne6W4',
+      libraries: ['places']
+    }),
+	AgmDirectionModule,
     AppRoutingModule,
 	HttpClientModule,
 	FormsModule,

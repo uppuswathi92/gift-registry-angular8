@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
     styleUrls: ['./add-event.component.css', '../../form-style.css']
 })
 export class AddEventComponent implements OnInit {
-    event: Events = new Events("", "", "", "", "", "");
+    event: Events = new Events("", "", "", "", "", "",false);
     isUpdate: Boolean = false;
     // eventDate = { month: '0o1', day: '0o1', year: '1o9o7o0' };
     //	eventDate = { month: parseInt('0o1'), day: parseInt('0o1'), year: parseInt('0o1') };

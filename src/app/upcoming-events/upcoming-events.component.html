@@ -1,0 +1,52 @@
+<div class="my-events">
+
+    <div class="col-md-6">
+        <h2 class="text-center">My Events</h2>
+        <div class="add-event" *ngIf="events && events.length==0"><a href="addevent">No upcoming events!</a></div>
+        <div *ngFor="let event of events" class="event-details">
+
+            <div class="card">
+                <div class="card-header">
+				<a class="user-host" *ngIf="events && event.host" placement="left" ngbPopover="You are hosting this event" triggers="mouseenter:mouseleave" href="javascript:void(0)"><i class="fas fa-user fa-2x"></i></a>
+				
+                    {{event.eventName}}
+
+
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{event.eventDate}}</h5>
+                    <a *ngIf="events && event.host" href="viewevent?eventId={{event.eventId}}" class="btn btn-primary link-style">Click here for details</a>
+					<a *ngIf="events && !event.host" href="viewevent?eventId={{event.eventId}}&event=other" class="btn btn-primary link-style">Click here for details</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div *ngIf="displaySpinner" class="text-center spinner">
+        <div class="spinner-border text-info loader" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete Event</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <div> Do you really want to delete {{currentEvent.eventName}}?</div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="deleteCurrentEvent()">Yes</button>
+    </div>
+</ng-template>

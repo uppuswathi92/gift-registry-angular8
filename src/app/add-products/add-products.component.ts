@@ -20,7 +20,7 @@ export class AddProductsComponent implements OnInit {
     product: Product = new Product("", "", "", false, "", "", "", "");
     submitted: Boolean = false;
     productId: String = "";
-    eventId: String = "";
+    eventId: string = "";
     isUpdate: Boolean = false;
     displaySpinner: Boolean = false;
     uploadInfo: any;

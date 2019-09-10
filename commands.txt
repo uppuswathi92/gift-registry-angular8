@@ -6,4 +6,7 @@ ng serve
 
 npm install --save font-awesome
 npm install ng2-file-upload --save
+$ npm install @agm/core --save
+
+npm install --save @agm/core agm-direction
 

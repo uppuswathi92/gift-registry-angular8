@@ -16,16 +16,19 @@
             <div class="card">
                 <div class="card-header">
                     {{event.eventName}}
-                    <div class="float-right"><a href="addevent?eventId={{event.eventId}}"><i class="fas fa-pencil-alt"></i></a> &nbsp;&nbsp;
-                        <a href="javascript:void(0)" (click)="deleteEvent(content, event)"><i class="fas fa-trash-alt"></i>
-
-                        </a></div>
+                    <div class="float-right">
+					<a *ngIf="!getDateDiff(event.eventDate)" href="addevent?eventId={{event.eventId}}"><i class="fas fa-pencil-alt"></i></a> 
+					<a *ngIf="getDateDiff(event.eventDate)" [class.disabled]="true" placement="left" ngbPopover="You cannot edit this event as it is over" triggers="mouseenter:mouseleave" href="#"><i class="fas fa-pencil-alt"></i></a>
+					&nbsp;&nbsp;
+                        <a *ngIf="!getDateDiff(event.eventDate)" href="javascript:void(0)" (click)="deleteEvent(content, event)"><i class="fas fa-trash-alt"></i></a>
+					<a *ngIf="getDateDiff(event.eventDate)" [class.disabled]="true" placement="left" ngbPopover="You cannot delete this event as it is over" triggers="mouseenter:mouseleave" href="#"><i class="fas fa-trash-alt"></i></a>
+					</div>
 
 
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{event.eventDate}}</h5>
-                    <a href="viewevent?eventId={{event.eventId}}" class="btn btn-primary link-style">Click here for details</a>
+                    <a href="viewevent?eventId={{event.eventId}}" class="btn btn-primary">Click here for details</a>
                 </div>
             </div>
 

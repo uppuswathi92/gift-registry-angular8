@@ -13,6 +13,10 @@
 				<a href="javascript:void(0)" *ngIf="loginService.isUserLoggedIn()" (click)="redirectOtherEvents()" class="nav-link">Other Events
                 </a>
 			</li>
+			<li>
+				<a href="/upcomingevents" *ngIf="loginService.isUserLoggedIn()" class="nav-link">Upcoming Events
+                </a>
+			</li>
             <li>
 				<a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a>
 			</li>

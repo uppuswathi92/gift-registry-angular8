@@ -34,8 +34,3 @@
 	text-overflow: ellipsis(...)
 }
 .update-product .bs-popover-left{width: 250px !important;left: -159px !important;}
-a.disabled {
-    color: gray;
-    cursor: not-allowed;
-    text-decoration: underline;
-}

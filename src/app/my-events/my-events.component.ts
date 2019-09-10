@@ -27,7 +27,11 @@ export class MyEventsComponent implements OnInit {
         //this.headerComponent.getNotifications();
         this.getEventNotification();
     }
-
+	
+	getDateDiff(date): Boolean{
+		var eDate = (date != null)?date.split(" at "):[];
+		return new Date(eDate[0]).getTime() < new Date().getTime();
+	}
     getEventNotification() {
 
         this.eventsService.getEventNotification().subscribe(
@@ -45,13 +49,9 @@ export class MyEventsComponent implements OnInit {
         console.log(response.service);
         if (response.service == "getEvents") {
             this.displaySpinner = false;
-            //dateTime= response.eventDate.split("at");
-            //console.log(this.datePipe.transform(dateTime[0], 'fullDate'));
             console.log(response);
             for (let i = 0; i < response.results.length; i++) {
                 var dateArray = response.results[i].eventDate.split(" at ");
-                //console.log(response[i].eventDate.split(" at ")[0]);
-                //console.log(new Date(dateArray[0]));
                 var formattedDate = this.datePipe.transform(new Date(dateArray[0]), 'fullDate');
                 response.results[i].eventDate = formattedDate + " at " + dateArray[1];
             }

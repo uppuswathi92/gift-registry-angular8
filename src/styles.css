@@ -30,4 +30,14 @@ a{
 .btn-link{
 	text-decoration: none !important;
 }
-
+.color-green{
+	color: #7fd87f;
+}
+.font-bold{
+	font-weight: bold;
+}
+a.disabled {
+    color: gray;
+    cursor: not-allowed;
+    text-decoration: underline;
+}

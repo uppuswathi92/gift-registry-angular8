@@ -12,10 +12,12 @@ import { EventsService } from '../service/events.service';
 export class AddInviteesComponent implements OnInit {
     eventId: string;
     submitted: Boolean = false;
+	displaySpinner: Boolean = false;
     public inviteeName: any;
     invitees = [{
         name: '',
-        username: ''
+        username: '',
+		rsvp: ''
     }];
     names = [];
     formatter = (x: {
@@ -76,9 +78,11 @@ export class AddInviteesComponent implements OnInit {
                         var nameArray = response.results[i].split("-");
                         var name = (nameArray.length > 0) ? nameArray[0] : "";
                         var username = (nameArray.length > 0) ? nameArray[1] : "";
+						var rsvp = (nameArray.length > 0) ? nameArray[2] : "";
                         this.invitees.push({
                             name: name,
-                            username: username
+                            username: username,
+							rsvp: rsvp
                         });
                     }
                 }
@@ -87,6 +91,7 @@ export class AddInviteesComponent implements OnInit {
                 this.submitted = false;
                 this.getInvitees();
                 this.getUsers();
+				this.displaySpinner = false;
             } else if (response.service == "deleteInvitee") {
                 this.getInvitees();
                 this.getUsers();
@@ -99,6 +104,7 @@ export class AddInviteesComponent implements OnInit {
     addInvitee(): void {
         this.submitted = true;
         if (this.inviteeName.username) {
+			this.displaySpinner = true;
             this.eventsService.addInvitee(this.inviteeName.username, this.eventId).subscribe(
                 response => this.handleSuccessfulResponse(response),
             );

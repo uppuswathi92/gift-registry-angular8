@@ -13,6 +13,8 @@ import { ViewProductsComponent } from './view-products/view-products.component';
 import { OtherEventsComponent } from './other-events/other-events.component';
 import { PurchaseProductComponent } from './purchase-product/purchase-product.component';
 import { AuthGaurdService } from './service/auth-gaurd.service';
+import { UpcomingEventsComponent } from './upcoming-events/upcoming-events.component';
+import { EventLocationComponent } from './event-location/event-location.component';
 const routes: Routes = [
   { path:'registry-user', component: RegistryUserComponent},
   { path:'registration', component: AddUserComponent},
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'viewproduct', component: ViewProductsComponent, canActivate:[AuthGaurdService] },
   { path: 'otherevents', component: OtherEventsComponent,canActivate:[AuthGaurdService] },
   { path: 'purchaseproduct', component: PurchaseProductComponent,canActivate:[AuthGaurdService] },
+  { path: 'upcomingevents', component: UpcomingEventsComponent,canActivate:[AuthGaurdService] },
+  { path: 'eventlocation', component: EventLocationComponent,canActivate:[AuthGaurdService] },
 ];
 
 @NgModule({

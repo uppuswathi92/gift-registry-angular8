@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { EventsService } from '../service/events.service';
 import { DatePipe } from '@angular/common';
-
 @Component({
     selector: 'app-view-event',
     templateUrl: './view-event.component.html',
@@ -12,8 +11,11 @@ export class ViewEventComponent implements OnInit {
     eventId: string;
     events: string[];
     isOtherEvent: Boolean = false;
+	responded: string = "no response";
+	displaySpinner: Boolean = false;
+	pastEvent: Boolean = false;
     constructor(private route: ActivatedRoute, private eventsService: EventsService,
-        private datePipe: DatePipe) {
+        private datePipe: DatePipe, private router: Router) {
         this.route.queryParams.subscribe(params => {
             this.eventId = params['eventId'];
             if (params['event'] == 'other') {
@@ -26,22 +28,48 @@ export class ViewEventComponent implements OnInit {
         this.eventsService.getEventById(this.eventId).subscribe(
             response => this.handleSuccessfulResponse(response),
         );
+		this.getRsvp();
     }
+	getRsvp(){
+		this.eventsService.getRsvp(this.eventId).subscribe(
+            response => this.handleSuccessfulResponse(response),
+        );
+	}
+	updateRsvp(status){
+		this.displaySpinner = true;
+		var response = (status === "yes")? "attending": "not attending";
+		this.eventsService.updateRsvp(this.eventId, status).subscribe(
+            response => this.handleSuccessfulResponse(response),
+        );
+	}
+	getDirections(address){
+		sessionStorage.setItem("eventAddress", address);
+		this.router.navigate(["eventlocation"], {
+                    queryParams: {
+                        eventId: this.eventId
+                    }
+                });
+	}
+	changeResponse(){
+		this.responded = "no response";
+	}	
     handleSuccessfulResponse(response) {
-        //dateTime= response.eventDate.split("at");
-        //console.log(this.datePipe.transform(dateTime[0], 'fullDate'));
         console.log(response);
         if (response != null) {
             if (response.service === "getEventById") {
-                for (let i = 0; i < response.results.length; i++) {
-                    var dateArray = response.results[i].eventDate.split(" at ");
-                    //console.log(response[i].eventDate.split(" at ")[0]);
-                    //console.log(new Date(dateArray[0]));
+                    var dateArray = response.results.eventDate.split(" at ");
                     var formattedDate = this.datePipe.transform(new Date(dateArray[0]), 'fullDate');
-                    response.results[i].eventDate = formattedDate + " at " + dateArray[1];
-                }
-                this.events = response.results;
-            }
+                    response.results.eventDate = formattedDate + " at " + dateArray[1];
+					this.events = response.results;
+					if(dateArray[0] && new Date(dateArray[0]).getTime() < new Date().getTime()){
+						this.pastEvent = true;
+					}
+            }else if(response.service === "getRsvp"){
+				this.responded = response.results;
+			}else if(response.service === "updateRsvp"){
+				this.displaySpinner = false;
+				this.responded = response.results;
+			}
         }
 
     }
