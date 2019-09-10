@@ -52,7 +52,7 @@ import { EventLocationComponent } from './event-location/event-location.componen
   imports: [
     BrowserModule,
 	AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCG59Hss9r5APBVC0bL-Kz9oQf5Qdne6W4',
+      apiKey: '',
       libraries: ['places']
     }),
 	AgmDirectionModule,
