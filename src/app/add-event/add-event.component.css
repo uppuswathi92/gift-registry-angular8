@@ -15,6 +15,7 @@ span.chevron.ngb-tp-chevron:hover:before, span.glyphicon.glyphicon-chevron-down:
     display: flex;
     align-items: center;
     justify-content: center;
+	margin-bottom:100px;
 }
 
 .event-date{

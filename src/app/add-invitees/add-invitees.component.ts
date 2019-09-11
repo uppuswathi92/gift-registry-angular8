@@ -4,6 +4,7 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { RegistryUser, RegistryUserService } from '../service/registry-user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventsService } from '../service/events.service';
+
 @Component({
     selector: 'app-add-invitees',
     templateUrl: './add-invitees.component.html',
@@ -12,14 +13,15 @@ import { EventsService } from '../service/events.service';
 export class AddInviteesComponent implements OnInit {
     eventId: string;
     submitted: Boolean = false;
-	displaySpinner: Boolean = false;
-    public inviteeName: any;
+    displaySpinner: Boolean = false;
+    inviteeName: any;
     invitees = [{
         name: '',
         username: '',
-		rsvp: ''
+        rsvp: ''
     }];
     names = [];
+    //format typeahead
     formatter = (x: {
         name: string
     }) => x.name;
@@ -28,14 +30,19 @@ export class AddInviteesComponent implements OnInit {
     ) {
         this.route.queryParams.subscribe(params => {
             this.eventId = params['eventId'];
+            this.validateUserForEvent();
         });
     }
+    validateUserForEvent() {
+        this.eventsService.validateUserForEvent(localStorage.getItem("username"), this.eventId).subscribe(
+            response => this.handleSuccessfulResponse(response),
+        );
+    }
+    //get typeahead results for invitee name
     search = (text$: Observable < string > ) =>
     text$.pipe(
         debounceTime(200),
         distinctUntilChanged(),
-        /*map(term => term.length < 2 ? []
-          : this.names.filter(v => v.name.toLowerCase().indexOf(term.name.toLowerCase()) > -1).slice(0, 10))*/
         map(term => term === '' ? [] :
             this.names.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     )
@@ -43,11 +50,14 @@ export class AddInviteesComponent implements OnInit {
         this.getInvitees();
         this.getUsers();
     }
+    //get all users details for typeahead results
     getUsers(): void {
         this.registryUserService.getUsers().subscribe(
             response => this.handleSuccessfulResponse(response),
         );
     }
+
+    //validates if invitee has already been added to display in typeahead
     validateInvitee(name): Boolean {
         for (let i = 0; i < this.invitees.length; i++) {
             if (this.invitees[i].name === name) {
@@ -56,6 +66,8 @@ export class AddInviteesComponent implements OnInit {
         }
         return false;
     }
+
+    //handles response from http service
     handleSuccessfulResponse(response) {
         if (response) {
             if (response.service == "getUsers") {
@@ -78,57 +90,59 @@ export class AddInviteesComponent implements OnInit {
                         var nameArray = response.results[i].split("-");
                         var name = (nameArray.length > 0) ? nameArray[0] : "";
                         var username = (nameArray.length > 0) ? nameArray[1] : "";
-						var rsvp = (nameArray.length > 0) ? nameArray[2] : "";
+                        var rsvp = (nameArray.length > 0) ? nameArray[2] : "";
                         this.invitees.push({
                             name: name,
                             username: username,
-							rsvp: rsvp
+                            rsvp: rsvp
                         });
                     }
                 }
             } else if (response.service == "addInvitees") {
+                var index = this.names.indexOf(this.inviteeName);
+                if (index > -1) {
+                    this.names.splice(index, 1);
+                }
                 this.inviteeName = "";
                 this.submitted = false;
                 this.getInvitees();
-                this.getUsers();
-				this.displaySpinner = false;
+                this.displaySpinner = false;
             } else if (response.service == "deleteInvitee") {
                 this.getInvitees();
-                this.getUsers();
+            } else if (response.service === "validateUserEvent") {
+                if (!response.results) {
+                    this.router.navigate(["myevents"], {});
+                }
             }
         }
-        if (response && response.length > 0) {
-
-        }
     }
+
+    //invoked on click of add invitee
     addInvitee(): void {
         this.submitted = true;
         if (this.inviteeName.username) {
-			this.displaySpinner = true;
+            this.displaySpinner = true;
             this.eventsService.addInvitee(this.inviteeName.username, this.eventId).subscribe(
                 response => this.handleSuccessfulResponse(response),
             );
         }
-
-
     }
+
+    //gets invitees for current event to display list of invitees
     getInvitees(): void {
         this.eventsService.getInvitees(this.eventId).subscribe(
             response => this.handleSuccessfulResponse(response),
         );
-        console.log(this.inviteeName);
-        console.log(this.eventId);
     }
-    deleteInvitee(username): void {
-        this.eventsService.deleteInvitee(this.eventId, username).subscribe(
+
+    //invokes delete invitee service
+    deleteInvitee(invitee): void {
+        this.names.push({
+            name: invitee.name,
+            username: invitee.username
+        });
+        this.eventsService.deleteInvitee(this.eventId, invitee.username).subscribe(
             response => this.handleSuccessfulResponse(response),
         );
-    }
-    viewEvent() {
-        this.router.navigate(["viewevent"], {
-            queryParams: {
-                eventId: this.eventId
-            }
-        });
     }
 }

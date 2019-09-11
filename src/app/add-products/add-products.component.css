@@ -1,5 +1,10 @@
 .view-product{
 	position: absolute;
-    top: 415px;
+    top: 355px;
+    left: 201px;
+}
+.view-product-edit{
+	position: absolute;
+    top: 450px;
     left: 201px;
 }

@@ -21,12 +21,6 @@ export class EventsService {
         private httpClient: HttpClient
     ) {}
     public addEvent(event) {
-        /*let params = new HttpParams();
-	params = params.append('Events', event);
-	console.log(event.eventName);
-	const body = {events: event, username: localStorage.getItem('username')};
-	let username = localStorage.getItem('username');
-    params = params.append('username', localStorage.getItem('username'));*/
         event.username = localStorage.getItem('username');
         return this.httpClient.post < Object > ("http://localhost:8080/events", event);
     }
@@ -41,12 +35,6 @@ export class EventsService {
         return this.httpClient.get < String > ('http://localhost:8080/giftregistry/addInvitee?eventId=' + eventId + '&username=' + username);
     }
     public updateEvent(event) {
-        /*let params = new HttpParams();
-	params = params.append('Events', event);
-	console.log(event.eventName);
-	const body = {events: event, username: localStorage.getItem('username')};
-	let username = localStorage.getItem('username');
-    params = params.append('username', localStorage.getItem('username'));*/
         return this.httpClient.post < String > ("http://localhost:8080/events/updateEvent", event);
     }
 
@@ -79,6 +67,9 @@ export class EventsService {
     }
 	public getLatLng(address) {
         return this.httpClient.get < Object > ('https://maps.googleapis.com/maps/api/geocode/json?address=' + address+'&key=AIzaSyCAgN2y10wHJCPc8VYAkGzjhaZCrsb3u44');
+    }
+	public validateUserForEvent(username,eventId) {
+        return this.httpClient.get < Object > ('http://localhost:8080/events/validateUserEvent/'+username+"/"+eventId);
     }
     public numberOfNotifications() {
         this.notifications = 0;

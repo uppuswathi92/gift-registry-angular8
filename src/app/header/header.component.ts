@@ -11,21 +11,15 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
     numberOfNotifications: any;
     constructor(private eventsService: EventsService, private loginService: AuthenticationService, private router: Router) {
-        console.log("here");
-        this.eventsService.getEventNotification().subscribe(name => this.changeName(name));
+        this.eventsService.getEventNotification().subscribe(name => this.handleResponse(name));
 
     }
-    private changeName(name: Object): void {
+    private handleResponse(name: Object): void {
         this.numberOfNotifications = name["results"];
-        console.log(this.numberOfNotifications);
     }
-    ngOnInit() {
-        /*this.eventsService.getEventNotification().subscribe(
-        response => this.handleSuccessfulResponse(response),
-        );*/
-        //this.eventsService.numberOfNotifications();
+    ngOnInit() {}
 
-    }
+    //redirects to otherevents page based on notifications
     redirectOtherEvents(): void {
         if (this.eventsService.numberOfNotifications() === 0) {
             this.router.navigate(["otherevents"]);
@@ -35,26 +29,6 @@ export class HeaderComponent implements OnInit {
                     new: this.eventsService.numberOfNotifications()
                 }
             });
-        }
-    }
-    getNotifications() {
-        this.numberOfNotifications = 0;
-        this.eventsService.getEventNotification().subscribe(
-            response => this.handleSuccessfulResponse(response),
-        );
-        console.log(this.numberOfNotifications);
-        return this.numberOfNotifications;
-    }
-
-    check() {
-        console.log("in check");
-    }
-    handleSuccessfulResponse(response) {
-        if (response != null) {
-            if (response.service == "eventNotification") {
-                console.log(response.results);
-                this.numberOfNotifications = response.results;
-            }
         }
     }
 }

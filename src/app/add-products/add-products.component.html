@@ -1,7 +1,3 @@
-<div class="col-md-12">
-    <!--<div class="alert alert-danger" role="alert" *ngIf="submitted && (!user.username || !user.password || !confirmPassword || !user.firstName || !user.lastName || !user.email || !user.phoneNumber)">Please enter all fields!</div>
-<div class="alert alert-danger" *ngIf="submitted && userExists" role="alert">An account already exists with this username or email!</div>-->
-</div>
 <div class="add-event">
     <div class="col-md-12">
         <h2 class="text-center">Add Product</h2>
@@ -9,14 +5,9 @@
         <form>
             <div class="wrapper fadeInDown">
                 <div id="formContent">
-                    <!-- Tabs Titles -->
-
-                    <!-- Icon -->
                     <div class="fadeIn first">
                         <i class="fas fa-shopping-basket fa-3x"></i>
                     </div>
-
-                    <!-- Login Form -->
                     <form>
                         <input type="text" id="productName" class="fadeIn second" name="productName" placeholder="Product Name" [(ngModel)]="product.productName" />
                         <div><span class="color-red" *ngIf="submitted && !product.productName"><i class="fas fa-exclamation-circle"></i> Please enter product name</span></div>
@@ -24,49 +15,17 @@
                         <div><span class="color-red" *ngIf="submitted && !product.productLink"><i class="fas fa-exclamation-circle"></i> Please enter product link</span></div>
                         <input type="text" id="productColor" class="fadeIn second" name="productColor" placeholder="Product Color" [(ngModel)]="product.productColor" />
                         <div><span class="color-red" *ngIf="submitted && !product.productColor"><i class="fas fa-exclamation-circle"></i> Please enter product color</span></div>
-						<img width=100 height=100 *ngIf="isUpdate" src="{{product.productImage}}"/>
-						<input id="file" type="file" class="fadeIn second margin-top-10"  (change)="fileChange($event)" />
-                        <!--<input id="file" type="file"  (change)="fileChange($event)" />
-						<img src="{{productImage}}"/>-->
+                        <div *ngIf="isUpdate"><img class="fadeIn second" width=100 height=100 src="{{product.productImage}}" /></div>
+                        <input id="file" type="file" class="fadeIn second margin-top-10" (change)="fileChange($event)" />
                         <input type="submit" *ngIf="!isUpdate" (click)="addProduct()" class="fadeIn fourth margin-top-10" value="Add Product">
                         <input type="button" *ngIf="isUpdate" (click)="editProduct()" class="fadeIn fourth margin-top-10" value="Edit Product"><br />
-                        <a href="javascript:void(0)" (click)=viewProducts() class="create-event-link view-product">Go back</a>
+                        <a href="viewproduct?eventId={{eventId}}" *ngIf="isUpdate" class="create-event-link view-product-edit fadeIn">Go back</a>
+                        <a href="viewproduct?eventId={{eventId}}" *ngIf="!isUpdate" (click)=viewProducts() class="create-event-link view-product fadeIn">Go back</a>
                     </form>
 
                 </div>
             </div>
-            <!--<div class="form-group">
-    <label for="productName">Product Name:</label>
-    <input type="name" [(ngModel)]="product.productName" placeholder="Product Name" name="productName" class="form-control" id="productName">
-	<span *ngIf="submitted && !product.productName">Please enter Product Name</span>
-  </div>
-  <div class="form-group">
-    <label for="productLink">Product Link:</label>
-    <input [(ngModel)]="product.productLink" placeholder="Product Link" name="productLink" class="form-control" id="productLink">
-	<span *ngIf="submitted && !product.productLink">Please enter event address</span>
-  </div>
-<!--<div class="form-group">
-    <label for="eventDate">Event Date:</label>
-    <input [(ngModel)]="eventDate" placeholder="Event Date" name="eventDate" class="form-control" id="eventDate">
-	<span *ngIf="submitted && !eventDate">Please ebter event date</span>
-  </div>
- <div class="form-group">
-    <label for="productColor">Product Color:</label>
-    <input [(ngModel)]="product.productColor" placeholder="Product Color" name="productColor" class="form-control" id="productColor">
-	<span *ngIf="submitted && !product.productColor">Please enter event address</span>
-  </div>
-  <!--<div class="form-group">
-    <label for="eventTime">Event Time:</label>
-    <input [(ngModel)]="eventTime" placeholder="Event Time" name="eventTime" class="form-control" id="eventTime">
-		<span *ngIf="submitted && !eventTime">Please enter event time</span>
-
-  </div>
- 
-  <button class="btn btn-primary" *ngIf="!isUpdate" (click)="addProduct()">Add Product</button>
-  <button class="btn btn-primary" *ngIf="isUpdate" (click)="editProduct()">Edit Product</button>-->
-
         </form>
-
     </div>
     <div *ngIf="displaySpinner" class="text-center spinner">
         <div class="spinner-border text-info loader" role="status">

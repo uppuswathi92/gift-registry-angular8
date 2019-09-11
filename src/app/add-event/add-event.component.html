@@ -1,10 +1,6 @@
 <div class="alert alert-danger" role="alert" *ngIf="notifications">
     This event is over. You cannot edit this event !
 </div>
-<div class="col-md-12">
-    <!--<div class="alert alert-danger" role="alert" *ngIf="submitted && (!user.username || !user.password || !confirmPassword || !user.firstName || !user.lastName || !user.email || !user.phoneNumber)">Please enter all fields!</div>
-<div class="alert alert-danger" *ngIf="submitted && userExists" role="alert">An account already exists with this username or email!</div>-->
-</div>
 <div class="add-event">
     <div class="col-md-6">
         <h2 class="text-center">Add Event</h2>
@@ -12,18 +8,13 @@
         <form>
             <div class="wrapper fadeInDown">
                 <div id="formContent">
-                    <!-- Tabs Titles -->
-
-                    <!-- Icon -->
                     <div class="fadeIn first">
                         <i class="far fa-calendar-plus fa-3x"></i>
                     </div>
-
-                    <!-- Login Form -->
                     <form>
                         <input type="text" id="eventName" class="fadeIn second" name="eventName" placeholder="Event Name" [(ngModel)]="event.eventName" />
                         <div><span class="color-red" *ngIf="submitted && !event.eventName"><i class="fas fa-exclamation-circle"></i> Please enter event name</span></div>
-                        <input type="text" id="eventAddress" class="fadeIn third" name="eventAddress" placeholder="Event Address" [(ngModel)]="event.eventAddress" />
+                        <input type="text" id="eventAddress" class="fadeIn third" name="eventAddress" placeholder="Event Address" [(ngModel)]="event.eventAddress" (keydown.enter)="$event.preventDefault()" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search />
                         <div><span class="color-red" *ngIf="submitted && !event.eventAddress"><i class="fas fa-exclamation-circle"></i> Please enter event address</span></div>
                         <div class="input-group event-date">
                             <input class="form-control fadeIn second event-date-picker" placeholder="Event Date" name="dp" [(ngModel)]="eventDate" name="eventDate" ngbDatepicker #d="ngbDatepicker" [minDate]="minDate" />
@@ -49,57 +40,6 @@
 
                 </div>
             </div>
-            <!--<div class="form-group">
-    <label for="eventName">Event Name:</label>
-    <input type="name" [(ngModel)]="event.eventName" placeholder="Event Name" name="eventName" class="form-control" id="eventName">
-	<span *ngIf="submitted && !event.eventName">Please enter Event Name</span>
-  </div>
-  <div class="form-group">
-    <label for="eventAddress">Event Address:</label>
-    <input [(ngModel)]="event.eventAddress" placeholder="Event Address" name="eventAddress" class="form-control" id="eventAddress">
-	<span *ngIf="submitted && !event.eventAddress">Please enter event address</span>
-  </div>
-<!--<div class="form-group">
-    <label for="eventDate">Event Date:</label>
-    <input [(ngModel)]="eventDate" placeholder="Event Date" name="eventDate" class="form-control" id="eventDate">
-	<span *ngIf="submitted && !eventDate">Please ebter event date</span>
-  </div>
-  <div class="form-group">
-	<label for="eventDate">Event Date:</label>
-      <div class="input-group">
-	  <input class="form-control" placeholder="Event Date"
-             name="dp" [(ngModel)]="eventDate" name= "eventDate" ngbDatepicker #d="ngbDatepicker"/>
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-      </div>
-	  </div>
-	  <span *ngIf="submitted && !eventDate">Please enter event date</span>
-    </div>
-	
-  <!--<div class="form-group">
-    <label for="eventTime">Event Time:</label>
-    <input [(ngModel)]="eventTime" placeholder="Event Time" name="eventTime" class="form-control" id="eventTime">
-		<span *ngIf="submitted && !eventTime">Please enter event time</span>
-
-  </div>
-  <div class="form-group">
-    <label for="eventTime">Event Time:</label>
-    <div class="event-time-align">
-	<ngb-timepicker [(ngModel)]="eventTime" name="eventTime"></ngb-timepicker>
-	</div>
-
-		<span *ngIf="submitted && !eventTime">Please enter event time</span>
-
-  </div>
-  <div class="form-group">
-    <label for="eventMsg">Event Message:</label>
-    <textarea [(ngModel)]="event.eventMsg" placeholder="Event Message" name="eventMsg" class="form-control" id="eventMsg"> </textarea>
-	<span *ngIf="submitted && !event.eventMsg">Please enter event message</span>
-  </div>
-  
-  <button class="btn btn-primary" *ngIf="!isUpdate" (click)="addEvent()">Add Event</button>
-  <button class="btn btn-primary" *ngIf="isUpdate" (click)="updateEvent()">Update Event</button>-->
-
         </form>
     </div>
     <div *ngIf="displaySpinner" class="text-center spinner">

@@ -10,7 +10,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./view-products.component.css']
 })
 export class ViewProductsComponent implements OnInit {
-    product: Product = new Product("", "", "", false, "", "", "","");
+    product: Product = new Product("", "", "", false, "", "", "", "");
     products: string[];
     eventId: string = "";
     currentProduct: any;
@@ -26,31 +26,31 @@ export class ViewProductsComponent implements OnInit {
     ngOnInit() {
         this.getProducts();
     }
+
+    //get product details for the event
     getProducts(): void {
         this.displaySpinner = true;
         this.productsService.getProducts(this.eventId).subscribe(
             response => this.handleSuccessfulResponse(response));
     }
+
+    //handle response from http service
     handleSuccessfulResponse(response) {
         if (response.service === "getProducts") {
             this.displaySpinner = false;
-			for(var i = 0;i<response.results.length;i++){
-				response.results[i].productImage = "data:image/jpg;base64,"+response.results[i].productImage;
-			}
-			
-			this.products = response.results;
+            for (var i = 0; i < response.results.length; i++) {
+                response.results[i].productImage = "data:image/jpg;base64," + response.results[i].productImage;
+            }
+
+            this.products = response.results;
         } else if (response.service === "deleteProduct") {
             this.displaySpinner = false;
             this.getProducts();
         }
-        console.log(response);
     }
 
+    //open modal to confirm deletion of product
     deleteProduct(content, product): void {
-        /*this.displaySpinner = true;
-		this.eventsService.deleteEvent(eventId).subscribe(
-     response =>this.handleSuccessfulResponse(response),
-    );*/
         this.currentProduct = product;
         this.modalReference = this.modalService.open(content);
         this.modalReference.result.then((result) => {
@@ -71,14 +71,16 @@ export class ViewProductsComponent implements OnInit {
             return `with: ${reason}`;
         }
     }
+
+    //invoke service to delete the product
     deleteCurrentProduct() {
         this.displaySpinner = true;
-        console.log(this.currentProduct);
         this.productsService.deleteProduct(this.currentProduct.productId).subscribe(
             response => this.handleSuccessfulResponse(response));
         this.modalReference.close();
     }
 
+    //redirect to add products page
     addProduct() {
         this.router.navigate(["addproduct"], {
             queryParams: {
@@ -86,5 +88,4 @@ export class ViewProductsComponent implements OnInit {
             }
         });
     }
-
 }

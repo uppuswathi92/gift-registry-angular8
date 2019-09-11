@@ -49,7 +49,7 @@ export class ProductsService {
 		const requestOptions: Object = {
             responseType: 'text'
         }
-        return this.httpClient.post < Object > ("http://localhost:8080/filetest/123", uploadData,requestOptions);
+        return this.httpClient.post < Object > ("http://localhost:8080/filetest/", uploadData,requestOptions);
     }
     public getImage() {
         const requestOptions: Object = {

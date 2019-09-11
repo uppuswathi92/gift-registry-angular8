@@ -3,6 +3,7 @@ import { EventsService } from '../service/events.service';
 import { DatePipe } from '@angular/common';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from '../header/header.component';
+
 @Component({
     providers: [HeaderComponent],
     selector: 'app-my-events',
@@ -18,38 +19,39 @@ export class MyEventsComponent implements OnInit {
     closeResult: any;
     notifications: Boolean = false;
     numberOfNotifications: any = 0;
-    //@ViewChild(HeaderComponent, {static: false}) headerComponent : HeaderComponent;
     constructor(private eventsService: EventsService,
         private datePipe: DatePipe, private modalService: NgbModal, private headerComponent: HeaderComponent) {}
 
     ngOnInit() {
         this.getEvents();
-        //this.headerComponent.getNotifications();
         this.getEventNotification();
     }
-	
-	getDateDiff(date): Boolean{
-		var eDate = (date != null)?date.split(" at "):[];
-		return new Date(eDate[0]).getTime() < new Date().getTime();
-	}
-    getEventNotification() {
 
+    //check if event date is past
+    getDateDiff(date): Boolean {
+        var eDate = (date != null) ? date.split(" at ") : [];
+        return new Date(eDate[0]).getTime() < new Date().getTime();
+    }
+
+    //check if there are any new notifications 
+    getEventNotification() {
         this.eventsService.getEventNotification().subscribe(
             response => this.handleSuccessfulResponse(response),
         );
     }
 
+    //invokes service to get list of events
     getEvents() {
         this.displaySpinner = true;
         this.eventsService.getEvents(localStorage.getItem('username')).subscribe(
             response => this.handleSuccessfulResponse(response),
         );
     }
+
+    //handles response from http service
     handleSuccessfulResponse(response) {
-        console.log(response.service);
         if (response.service == "getEvents") {
             this.displaySpinner = false;
-            console.log(response);
             for (let i = 0; i < response.results.length; i++) {
                 var dateArray = response.results[i].eventDate.split(" at ");
                 var formattedDate = this.datePipe.transform(new Date(dateArray[0]), 'fullDate');
@@ -67,11 +69,9 @@ export class MyEventsComponent implements OnInit {
             }
         }
     }
+
+    //opens model on click of delete button to delete event
     deleteEvent(content, event) {
-        /*this.displaySpinner = true;
-		this.eventsService.deleteEvent(eventId).subscribe(
-     response =>this.handleSuccessfulResponse(response),
-    );*/
         this.currentEvent = event;
         this.modalReference = this.modalService.open(content);
         this.modalReference.result.then((result) => {
@@ -94,6 +94,7 @@ export class MyEventsComponent implements OnInit {
         }
     }
 
+    //invokes delete service to delete event
     deleteCurrentEvent() {
         this.displaySpinner = true;
         this.eventsService.deleteEvent(this.currentEvent.eventId).subscribe(

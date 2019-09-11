@@ -1,18 +1,5 @@
-<!--<div *ngFor="let product of products">
-<ngb-accordion [closeOthers]="true" activeIds="static-1">
-  <ngb-panel id="static-1" title="{{product.productName}}">
-  
-    <ng-template ngbPanelContent>
-       <div> Product Link: <a href="{{product.productLink}}" target="_black">{{ product.productLink | slice:0:40 }}{{ product.productLink.length > 20 ? '...' : ''}} </a></div>
-	  <div> Product Color: {{product.productColor}}</div>
-	  <button class="btn btn-primary" *ngIf="!product.purchased" (click)=purchaseProduct(product.productId)>Purchase Product</button> 
-	  <span *ngIf="product.purchased && product.purchasedBy == username"> This product is purchased by you </span>
-	  <span *ngIf="product.purchased && product.purchasedBy != username"> This product has already been purchased </span>
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion>
-</div>-->
 <h2 class="text-center">View Products</h2>
+<div class="add-product" *ngIf="products && products.length == 0"><a href="viewevent?eventId={{eventId}}&event=other" (click)=addProduct()>No products have been added yet. Click here to go back!</a></div>
 <div class="view-products">
     <div class="col-md-6">
         <div *ngFor="let product of products" class="product-details">
@@ -30,17 +17,11 @@
                                     <div> Product Link: <a href="{{product.productLink}}" target="_black">{{ product.productLink | slice:0:40 }}{{ product.productLink.length > 20 ? '...' : ''}} </a></div>
                                     <div> Product Color: {{product.productColor}}</div>
                                     <button class="btn btn-primary" *ngIf="!product.purchased" (click)=purchaseProduct(product.productId)>Purchase Product</button>
-                                    <span *ngIf="product.purchased && product.purchasedBy == username.toLowerCase()"> This product is purchased by you </span>
+                                    <span *ngIf="product.purchased && product.purchasedBy == username.toLowerCase()"> Yoou have purchased this product </span>
                                     <span *ngIf="product.purchased && product.purchasedBy != username.toLowerCase()"> This product has already been purchased </span>
                                 </div>
                             </div>
-
                         </div>
-                        <!--<a href="addproduct?productId={{product.productId}}" class="btn btn-default float-right">
-          <span class="glyphicon glyphicon-pencil"></span>Edit
-        </a>-->
-                        <!--<div> Product Link: {{product.productLink}}</div>-->
-
                     </ng-template>
                 </ngb-panel>
             </ngb-accordion>

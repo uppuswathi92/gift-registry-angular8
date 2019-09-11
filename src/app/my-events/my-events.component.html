@@ -1,37 +1,28 @@
 <div class="alert alert-primary" role="alert" *ngIf="notifications">
     You have been invited to {{numberOfNotifications}} new <span *ngIf="numberOfNotifications > 1">events </span> <span *ngIf="numberOfNotifications == 1">event</span> <a href="otherevents"> Click here to check it out</a> !
 </div>
-<div class="col-md-12">
-
-</div>
 <div class="my-events">
-
     <div class="col-md-6">
         <h2 class="text-center">My Events</h2>
         <div class="add-event" *ngIf="events && events.length==0"><a href="addevent">No events have been added yet. Click here to add an event!</a></div>
         <a href="addevent" class="create-event-link" *ngIf="events &&  events.length>0">Click here to create new event</a>
-
         <div *ngFor="let event of events" class="event-details">
-
             <div class="card">
                 <div class="card-header">
                     {{event.eventName}}
                     <div class="float-right">
-					<a *ngIf="!getDateDiff(event.eventDate)" href="addevent?eventId={{event.eventId}}"><i class="fas fa-pencil-alt"></i></a> 
-					<a *ngIf="getDateDiff(event.eventDate)" [class.disabled]="true" placement="left" ngbPopover="You cannot edit this event as it is over" triggers="mouseenter:mouseleave" href="#"><i class="fas fa-pencil-alt"></i></a>
-					&nbsp;&nbsp;
+                        <a *ngIf="!getDateDiff(event.eventDate)" href="addevent?eventId={{event.eventId}}"><i class="fas fa-pencil-alt"></i></a>
+                        <a *ngIf="getDateDiff(event.eventDate)" [class.disabled]="true" placement="left" ngbPopover="You cannot edit this event as it is over" triggers="mouseenter:mouseleave" href="#"><i class="fas fa-pencil-alt"></i></a>
+                        &nbsp;&nbsp;
                         <a *ngIf="!getDateDiff(event.eventDate)" href="javascript:void(0)" (click)="deleteEvent(content, event)"><i class="fas fa-trash-alt"></i></a>
-					<a *ngIf="getDateDiff(event.eventDate)" [class.disabled]="true" placement="left" ngbPopover="You cannot delete this event as it is over" triggers="mouseenter:mouseleave" href="#"><i class="fas fa-trash-alt"></i></a>
-					</div>
-
-
+                        <a *ngIf="getDateDiff(event.eventDate)" [class.disabled]="true" placement="left" ngbPopover="You cannot delete this event as it is over" triggers="mouseenter:mouseleave" href="#"><i class="fas fa-trash-alt"></i></a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{event.eventDate}}</h5>
                     <a href="viewevent?eventId={{event.eventId}}" class="btn btn-primary">Click here for details</a>
                 </div>
             </div>
-
         </div>
     </div>
     <div *ngIf="displaySpinner" class="text-center spinner">
@@ -39,8 +30,6 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-
-
 </div>
 
 <ng-template #content let-modal>

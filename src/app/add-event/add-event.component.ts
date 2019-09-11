@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+declare const google: any;
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { EventsService, Events } from '../service/events.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MapsAPILoader, MouseEvent } from '@agm/core';
 
 @Component({
     selector: 'app-add-event',
@@ -8,10 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
     styleUrls: ['./add-event.component.css', '../../form-style.css']
 })
 export class AddEventComponent implements OnInit {
-    event: Events = new Events("", "", "", "", "", "",false);
+    event: Events = new Events("", "", "", "", "", "", false);
     isUpdate: Boolean = false;
-    // eventDate = { month: '0o1', day: '0o1', year: '1o9o7o0' };
-    //	eventDate = { month: parseInt('0o1'), day: parseInt('0o1'), year: parseInt('0o1') };
     eventDate = {
         month: 1,
         day: 1,
@@ -25,15 +25,22 @@ export class AddEventComponent implements OnInit {
     eventId: string = "";
     displaySpinner: Boolean = false;
     minDate: any;
-    constructor(private eventsService: EventsService, private route: ActivatedRoute, private router: Router) {
+    geoCoder;
+    //selector for location search
+    @ViewChild('search', {
+        static: false
+    })
+    public searchElementRef: ElementRef;
+    constructor(private mapsAPILoader: MapsAPILoader, private eventsService: EventsService, private ngZone: NgZone, private route: ActivatedRoute, private router: Router) {
+        //getting eventId from query parameter
         this.route.queryParams.subscribe(params => {
             this.eventId = params['eventId'];
-
             if (this.eventId) {
                 this.isUpdate = true;
             }
         });
         const current = new Date();
+        //setting minimum date in calendar
         this.minDate = {
             year: current.getFullYear(),
             month: current.getMonth() + 1,
@@ -42,14 +49,39 @@ export class AddEventComponent implements OnInit {
     }
     ngOnInit() {
         this.setOnLoadDate();
+        //if it is event update, retrieve details from to display
         if (this.isUpdate) {
             this.displaySpinner = true;
             this.eventsService.getEventById(this.eventId).subscribe(
                 response => this.handleSuccessfulResponse(response),
             );
         }
+        this.searchLocation();
     }
-    setOnLoadDate() {
+    //populate location in event address input as user types
+    searchLocation(): void {
+        this.mapsAPILoader.load().then(() => {
+            this.geoCoder = new google.maps.Geocoder;
+
+            let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+                types: ["address"]
+            });
+            autocomplete.addListener("place_changed", () => {
+                this.ngZone.run(() => {
+                    //get the place result
+                    let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+                    //verify result
+                    if (place.geometry === undefined || place.geometry === null) {
+                        return;
+                    }
+                    this.event.eventAddress = place.formatted_address;
+                });
+            });
+        })
+    }
+
+    //set default date on load
+    setOnLoadDate(): void {
         var date = new Date();
         this.eventDate = {
             year: date.getFullYear(),
@@ -58,6 +90,7 @@ export class AddEventComponent implements OnInit {
         };
     }
 
+    //invoked on click of add event
     addEvent(): void {
         this.submitted = true;
         if (this.event.eventName && this.event.eventAddress && this.eventDate && this.eventTime && this.event.eventMsg) {
@@ -68,8 +101,9 @@ export class AddEventComponent implements OnInit {
             this.eventsService.addEvent(this.event).subscribe(
                 response => this.handleSuccessfulResponse(response));
         }
-
     }
+
+    //handles response from http service`
     handleSuccessfulResponse(response) {
         if (response != null) {
             if (response.service == "getEventById") {
@@ -94,9 +128,9 @@ export class AddEventComponent implements OnInit {
                 this.router.navigate(['myevents']);
             }
         }
-
     }
 
+    //invoked on click of update event
     updateEvent(): void {
         this.submitted = true;
         this.displaySpinner = true;

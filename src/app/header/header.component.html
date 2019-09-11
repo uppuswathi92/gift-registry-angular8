@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div><a href="" class="navbar-brand">Gift Registry</a></div>
-
+        <div><a *ngIf="loginService.isUserLoggedIn()" routerLink="/myevents" class="navbar-brand">Gift Registry</a></div>
+		<div><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="navbar-brand">Gift Registry</a></div>
         <ul class="navbar-nav">
             <li>
 				<a *ngIf="loginService.isUserLoggedIn()" routerLink="/myevents" class="nav-link">My Events</a>

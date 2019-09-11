@@ -14,10 +14,9 @@
         </div>
         <div class="col-sm">
             <span *ngIf="events">{{events.eventAddress}}</span>
-			<div class="col-sm" *ngIf="isOtherEvent"><br/>
-            <a href="javascript:void(0)" (click)=getDirections(events.eventAddress) class="btn btn-primary link-style">Get Directions</a>
-            <!--<button class="btn btn-primary">Add Products</button>-->
-        </div>
+            <div class="col-sm" *ngIf="isOtherEvent"><br />
+                <a href="javascript:void(0)" (click)=getDirections(events.eventAddress) class="btn btn-primary link-style">Get Directions</a>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -39,50 +38,38 @@
     <div class="row">
         <div class="col-sm" *ngIf="!isOtherEvent && !pastEvent">
             <a href="addproduct?eventId={{eventId}}" class="btn btn-primary link-style">Add Products</a>
-            <!--<button class="btn btn-primary">Add Products</button>-->
         </div>
         <div class="col-sm" *ngIf="!isOtherEvent && !pastEvent">
             <a href="viewproduct?eventId={{eventId}}" class="btn btn-primary link-style">View Products</a>
-            <!--<button class="btn btn-primary">Add Products</button>-->
         </div>
         <div class="col-sm" *ngIf="isOtherEvent && !pastEvent">
             <a href="purchaseproduct?eventId={{eventId}}" class="btn btn-primary link-style">View Products</a>
-            <!--<button class="btn btn-primary">Add Products</button>-->
         </div>
-		 <div class="color-red font-bold col-sm" *ngIf="isOtherEvent && pastEvent">
+        <div class="color-red font-bold col-sm" *ngIf="isOtherEvent && pastEvent">
             <span>This event is over!</span>
-            <!--<button class="btn btn-primary">Add Products</button>-->
         </div>
-        <!--<div class="col-sm">
-	<a href="addevent?eventId={{eventId}}" *ngIf="!isOtherEvent" class="btn btn-primary link-style">Update Event</a>
-    </div>-->
-		<div class="col-sm" *ngIf="isOtherEvent && responded === 'no response'">
-			<span>Attending?</span> &nbsp;&nbsp;
+        <div class="col-sm" *ngIf="isOtherEvent && responded === 'no response'">
+            <span>Attending?</span> &nbsp;&nbsp;
             <a href="javascript:void(0)" (click)="updateRsvp('yes')" class="btn btn-primary link-style">Yes</a>&nbsp;&nbsp;
-			<a href="javascript:void(0)" (click)="updateRsvp('no')" class="btn btn-primary link-style">No</a>
+            <a href="javascript:void(0)" (click)="updateRsvp('no')" class="btn btn-primary link-style">No</a>
         </div>
-		<div class="col-sm" *ngIf="isOtherEvent && responded != 'no response' && !pastEvent">
-			<span class="color-green font-bold" *ngIf="responded === 'attending'"> You are attending this event!</span>
-			<span class="color-red font-bold" *ngIf="responded === 'not attending'"> You are not attending this event!</span><br/>
-            <a href="javascript:void(0)" (click)= changeResponse() class="link-style">Click here to change response</a>&nbsp;&nbsp;
+        <div class="col-sm" *ngIf="isOtherEvent && responded != 'no response' && !pastEvent">
+            <span class="color-green font-bold" *ngIf="responded === 'attending'"> You are attending this event!</span>
+            <span class="color-red font-bold" *ngIf="responded === 'not attending'"> You are not attending this event!</span><br />
+            <a href="javascript:void(0)" (click)=changeResponse() class="link-style">Click here to change response</a>&nbsp;&nbsp;
         </div>
-		<div class="col-sm" *ngIf="isOtherEvent && pastEvent">
-			<span class="color-green font-bold" *ngIf="responded === 'attending'"> You have already attended this event!</span>
-			<span class="color-red font-bold" *ngIf="responded === 'not attending'"> You didn't attend this event!</span><br/>
+        <div class="col-sm" *ngIf="isOtherEvent && pastEvent">
+            <span class="color-green font-bold" *ngIf="responded === 'attending'"> You have already attended this event!</span>
+            <span class="color-red font-bold" *ngIf="responded === 'not attending'"> You didn't attend this event!</span><br />
         </div>
-        <div class="col-sm" *ngIf="!isOtherEvent && !pastEvent" >
+        <div class="col-sm" *ngIf="!isOtherEvent && !pastEvent">
             <a href="addinvitees?eventId={{eventId}}" class="btn btn-primary link-style">Add Invitees</a>
         </div>
-		<div class="color-red font-bold col-sm" *ngIf="!isOtherEvent && pastEvent">
+        <div class="color-red font-bold col-sm" *ngIf="!isOtherEvent && pastEvent">
             <span>This event is over!</span>
-            <!--<button class="btn btn-primary">Add Products</button>-->
         </div>
-        <!--<div class="col-sm">
-      <a href="addinvitees?eventId={{eventId}}" *ngIf="!isOtherEvent" class="btn btn-primary link-style">Delete Event</a>
-    </div>-->
     </div>
-</div>
-<div *ngIf="displaySpinner" class="text-center spinner">
+    <div *ngIf="displaySpinner" class="text-center spinner">
         <div class="spinner-border text-info loader" role="status">
             <span class="sr-only">Loading...</span>
         </div>

@@ -9,10 +9,9 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-    username = ''
-    password = ''
-    //string: username = "";
-    //string: password = "";
+    username: string = "";
+    password: string = "";
+	displaySpinner:Boolean = false;
     invalidLogin: Boolean = false;
     submitted: Boolean = false;
     registered: Boolean = false;
@@ -27,30 +26,28 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {}
-
+	
+	//authenticates user
     checkLogin() {
         this.invalidLogin = false;
         this.submitted = true;
-        this.loginservice.authenticate(this.username, this.password).subscribe(
-            response => this.handleSuccessfulResponse(response),
-        );
-        /*if (this.loginservice.authenticate(this.username, this.password)
-    ) {
-      //this.router.navigate([''])
-      this.invalidLogin = false
-    } else
-      this.invalidLogin = true
-  }*/
-
-
+		if(this.username && this.password){
+			this.displaySpinner = true;
+			this.loginservice.authenticate(this.username, this.password).subscribe(
+				response => this.handleSuccessfulResponse(response),
+			);
+		}
     }
+	
+	//handles response from http service
     handleSuccessfulResponse(response) {
         console.log(response);
         if (response != null) {
             if (response.service === "login") {
-                if (response.results === "success") {
-                    sessionStorage.setItem('username', this.username);
-					localStorage.setItem('username', this.username);
+				this.displaySpinner = false;
+                if (response.results != "failure") {
+                    sessionStorage.setItem('username', response.results);
+					localStorage.setItem('username', response.results);
                     this.router.navigate(['myevents']);
                 } else {
                     this.invalidLogin = true;

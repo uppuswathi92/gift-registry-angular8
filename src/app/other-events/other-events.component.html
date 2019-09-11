@@ -1,20 +1,18 @@
-<div class="col-md-12">
-</div>
 <div class="other-events">
-	<div class="col-md-6">
-	<h2 class="text-center">Other Events</h2>
-	<div class="add-event" *ngIf="events && events.length==0">You haven't been invited to any events yet!</div>
-	<div *ngFor="let event of events" class="event-details">
-	
-<div class="card">
-  <div class="card-header">
-    {{event.eventName}}
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{event.eventDate}}</h5>
-    <a href="viewevent?eventId={{event.eventId}}&event=other" class="btn btn-primary link-style">Click here for details</a>
-  </div>
-  </div>
-</div>
-</div>
+    <div class="col-md-6">
+        <h2 class="text-center">Other Events</h2>
+        <div class="add-event" *ngIf="events && events.length==0">You haven't been invited to any events yet!</div>
+        <div *ngFor="let event of events" class="event-details">
+
+            <div class="card">
+                <div class="card-header">
+                    {{event.eventName}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{event.eventDate}}</h5>
+                    <a href="viewevent?eventId={{event.eventId}}&event=other" class="btn btn-primary link-style">Click here for details</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -37,7 +37,7 @@ a{
 	font-weight: bold;
 }
 a.disabled {
-    color: gray;
+    color: gray !important;
     cursor: not-allowed;
     text-decoration: underline;
 }
