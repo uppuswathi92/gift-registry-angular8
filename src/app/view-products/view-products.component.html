@@ -1,6 +1,6 @@
-<h2 class="text-center">View Products</h2>
-<div class="add-product" *ngIf="products && products.length == 0"><a href="javascript:void(0)" (click)=addProduct()>No products have been added yet. Click here to add a product!</a></div>
-<a href="javascript:void(0)" (click)=addProduct() class="create-event-link" *ngIf="products && products.length > 0">Click here to add new product</a>
+<h2 class="text-center">View Gifts</h2>
+<div class="add-product" *ngIf="products && products.length == 0"><a href="javascript:void(0)" (click)=addProduct()>No gifts have been added yet. Click here to add a gift!</a></div>
+<a href="javascript:void(0)" (click)=addProduct() class="create-event-link" *ngIf="products && products.length > 0">Click here to add new gift!</a>
 <div class="view-products">
     <div class="col-md-6">
         <div *ngFor="let product of products" class="product-details">

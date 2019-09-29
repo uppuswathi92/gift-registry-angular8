@@ -87,6 +87,16 @@ export class AddProductsComponent implements OnInit {
     public fileChange(event) {
         this.imageUpdated = true;
         this.selectedFile = event.target.files[0];
+		//var mimeType = event.target.files[0].type;
+		//if (mimeType.match(/image\/*/) == null) {
+		  //this.message = "Only images are supported.";
+		  //return;
+		//}
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]); 
+		reader.onload = (_event) => { 
+		  this.product.productImage = reader.result.toString(); 
+		}
     }
 
     //invokes service that uploads product image in database

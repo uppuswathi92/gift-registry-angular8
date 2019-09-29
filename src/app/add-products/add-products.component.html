@@ -15,12 +15,12 @@
                         <div><span class="color-red" *ngIf="submitted && !product.productLink"><i class="fas fa-exclamation-circle"></i> Please enter product link</span></div>
                         <input type="text" id="productColor" class="fadeIn second" name="productColor" placeholder="Product Color" [(ngModel)]="product.productColor" />
                         <div><span class="color-red" *ngIf="submitted && !product.productColor"><i class="fas fa-exclamation-circle"></i> Please enter product color</span></div>
-                        <div *ngIf="isUpdate"><img class="fadeIn second" width=100 height=100 src="{{product.productImage}}" /></div>
+                        <div *ngIf="product.productImage"><img class="fadeIn second" width=100 height=100 src="{{product.productImage}}" /></div>
                         <input id="file" type="file" class="fadeIn second margin-top-10" (change)="fileChange($event)" />
                         <input type="submit" *ngIf="!isUpdate" (click)="addProduct()" class="fadeIn fourth margin-top-10" value="Add Product">
                         <input type="button" *ngIf="isUpdate" (click)="editProduct()" class="fadeIn fourth margin-top-10" value="Edit Product"><br />
-                        <a href="viewproduct?eventId={{eventId}}" *ngIf="isUpdate" class="create-event-link view-product-edit fadeIn">Go back</a>
-                        <a href="viewproduct?eventId={{eventId}}" *ngIf="!isUpdate" (click)=viewProducts() class="create-event-link view-product fadeIn">Go back</a>
+                        <a href="viewproduct?eventId={{eventId}}" *ngIf="isUpdate || product.productImage" class="create-event-link view-product-edit fadeIn">Go back</a>
+                        <a href="viewproduct?eventId={{eventId}}" *ngIf="!isUpdate && !product.productImage" (click)=viewProducts() class="create-event-link view-product fadeIn">Go back</a>
                     </form>
 
                 </div>

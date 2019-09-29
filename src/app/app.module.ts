@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegistryUserComponent } from './registry-user/registry-user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddUserComponent } from './add-user/add-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ import { AddInviteesComponent } from './add-invitees/add-invitees.component';
 import { ViewProductsComponent } from './view-products/view-products.component';
 import { OtherEventsComponent } from './other-events/other-events.component';
 import { PurchaseProductComponent } from './purchase-product/purchase-product.component';
-import { FileTestComponent } from './file-test/file-test.component';
 import { UpcomingEventsComponent } from './upcoming-events/upcoming-events.component';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
@@ -31,7 +29,6 @@ import { EventLocationComponent } from './event-location/event-location.componen
 @NgModule({
   declarations: [
     AppComponent,
-    RegistryUserComponent,
     AddUserComponent,
     HeaderComponent,
     FooterComponent,
@@ -45,7 +42,6 @@ import { EventLocationComponent } from './event-location/event-location.componen
     ViewProductsComponent,
     OtherEventsComponent,
     PurchaseProductComponent,
-    FileTestComponent,
     UpcomingEventsComponent,
     EventLocationComponent,
   ],
