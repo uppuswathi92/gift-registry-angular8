@@ -37,13 +37,13 @@
     </div>
     <div class="row">
         <div class="col-sm" *ngIf="!isOtherEvent && !pastEvent">
-            <a href="addproduct?eventId={{eventId}}" class="btn btn-primary link-style">Add Products</a>
+            <a href="addproduct?eventId={{eventId}}" class="btn btn-primary link-style">Add Gifts</a>
         </div>
         <div class="col-sm" *ngIf="!isOtherEvent && !pastEvent">
-            <a href="viewproduct?eventId={{eventId}}" class="btn btn-primary link-style">View Products</a>
+            <a href="viewproduct?eventId={{eventId}}" class="btn btn-primary link-style">View Gifts</a>
         </div>
         <div class="col-sm" *ngIf="isOtherEvent && !pastEvent">
-            <a href="purchaseproduct?eventId={{eventId}}" class="btn btn-primary link-style">View Products</a>
+            <a href="purchaseproduct?eventId={{eventId}}" class="btn btn-primary link-style">View Gifts</a>
         </div>
         <div class="color-red font-bold col-sm" *ngIf="isOtherEvent && pastEvent">
             <span>This event is over!</span>

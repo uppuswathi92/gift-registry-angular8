@@ -108,6 +108,7 @@ export class AddInviteesComponent implements OnInit {
                 this.getInvitees();
                 this.displaySpinner = false;
             } else if (response.service == "deleteInvitee") {
+				this.displaySpinner = false;
                 this.getInvitees();
             } else if (response.service === "validateUserEvent") {
                 if (!response.results) {
@@ -137,6 +138,7 @@ export class AddInviteesComponent implements OnInit {
 
     //invokes delete invitee service
     deleteInvitee(invitee): void {
+		this.displaySpinner = true;
         this.names.push({
             name: invitee.name,
             username: invitee.username

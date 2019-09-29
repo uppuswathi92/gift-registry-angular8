@@ -10,7 +10,7 @@
                     <ng-template ngbPanelTitle>
                         <div class="update-product">
                             <a *ngIf="product && !product.purchased" href="addproduct?productId={{product.productId}}"><i class="fas fa-pencil-alt"></i></a>
-                            <a *ngIf="product && product.purchased" [class.disabled]="true" placement="left" ngbPopover="You cannot edit this products as it has already been purchased" triggers="mouseenter:mouseleave" href="addproduct?productId={{product.productId}}"><i class="fas fa-pencil-alt"></i></a>
+                            <a *ngIf="product && product.purchased" [class.disabled]="true" placement="left" ngbPopover="You cannot edit this products as it has already been purchased" triggers="mouseenter:mouseleave" href="javascript:void(0)"><i class="fas fa-pencil-alt"></i></a>
                             &nbsp;&nbsp;
                             <a [class.disabled]="true" *ngIf="product && product.purchased" placement="left" ngbPopover="You cannot delete this products as it has already been purchased" triggers="mouseenter:mouseleave"><i class="fas fa-trash-alt"></i></a>
                             <a href="javascript:void(0)" *ngIf="product && !product.purchased" (click)="deleteProduct(content,product)"><i class="fas fa-trash-alt"></i>
@@ -26,7 +26,7 @@
                                 <div class="col-9">
                                     <div> Product Link: <a href="{{product.productLink}}" target="_black">{{ product.productLink | slice:0:40 }}{{ product.productLink.length > 20 ? '...' : ''}} </a></div>
                                     <div> Product Color: {{product.productColor}}</div>
-                                    <div> Purchased?: {{!product.purchased ? 'Not yet' : 'Yup'}}</div>
+                                    <div> {{!product.purchased ? 'This gift has not been purchased yet' : 'This gift has been purchased'}}</div>
                                 </div>
                             </div>
 

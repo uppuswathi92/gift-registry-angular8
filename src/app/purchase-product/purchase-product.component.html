@@ -16,9 +16,9 @@
                                 <div class="col-9">
                                     <div> Product Link: <a href="{{product.productLink}}" target="_black">{{ product.productLink | slice:0:40 }}{{ product.productLink.length > 20 ? '...' : ''}} </a></div>
                                     <div> Product Color: {{product.productColor}}</div>
-                                    <button class="btn btn-primary" *ngIf="!product.purchased" (click)=purchaseProduct(product.productId)>Purchase Product</button>
-                                    <span *ngIf="product.purchased && product.purchasedBy == username.toLowerCase()"> Yoou have purchased this product </span>
-                                    <span *ngIf="product.purchased && product.purchasedBy != username.toLowerCase()"> This product has already been purchased </span>
+                                    <button class="btn btn-primary" *ngIf="!product.purchased" (click)=purchaseProduct(product.productId)>Purchase Gift</button>
+                                    <span *ngIf="product.purchased && product.purchasedBy == username.toLowerCase()"> Yoou have purchased this gift </span>
+                                    <span *ngIf="product.purchased && product.purchasedBy != username.toLowerCase()"> This gift has already been purchased </span>
                                 </div>
                             </div>
                         </div>
