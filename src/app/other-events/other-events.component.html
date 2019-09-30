@@ -2,7 +2,36 @@
     <div class="col-md-6">
         <h2 class="text-center">Other Events</h2>
         <div class="add-event" *ngIf="events && events.length==0">You haven't been invited to any events yet!</div>
-        <div *ngFor="let event of events" class="event-details">
+		<div *ngIf="noresponseEvents && noresponseEvents.length > 0">Events you have not responded to yet!
+		 <div  *ngFor="let noresponseEvent of noresponseEvents" class="event-details">
+
+            <div class="card">
+                <div class="card-header">
+                    {{noresponseEvent.eventName}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{noresponseEvent.eventDate}}</h5>
+                    <a href="viewevent?eventId={{noresponseEvent.eventId}}&event=other" class="btn btn-primary link-style">Click here for details</a>
+                </div>
+            </div>
+        </div>
+		</div>
+		<div *ngIf="attendingEvents && attendingEvents.length > 0">Events you are attending!
+		 <div *ngFor="let attendingEvent of attendingEvents" class="event-details">
+
+            <div class="card">
+                <div class="card-header">
+                    {{attendingEvent.eventName}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{attendingEvent.eventDate}}</h5>
+                    <a href="viewevent?eventId={{attendingEvent.eventId}}&event=other" class="btn btn-primary link-style">Click here for details</a>
+                </div>
+            </div>
+        </div>
+		</div>
+		<div *ngIf="notAttendingEvents && notAttendingEvents.length > 0">Events you are not attending!
+		 <div  *ngFor="let event of notAttendingEvents" class="event-details">
 
             <div class="card">
                 <div class="card-header">
@@ -14,5 +43,32 @@
                 </div>
             </div>
         </div>
+		</div>
+		<div *ngIf="pastEvents && pastEvents.length > 0">Past Events!
+		 <div  *ngFor="let pastEvent of pastEvents" class="event-details">
+
+            <div class="card">
+                <div class="card-header">
+                    {{pastEvent.eventName}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{pastEvent.eventDate}}</h5>
+                    <a href="viewevent?eventId={{pastEvent.eventId}}&event=other" class="btn btn-primary link-style">Click here for details</a>
+                </div>
+            </div>
+        </div>
+		</div>
+        <!--<div *ngFor="let event of events" class="event-details">
+
+            <div class="card">
+                <div class="card-header">
+                    {{event.eventName}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{event.eventDate}}</h5>
+                    <a href="viewevent?eventId={{event.eventId}}&event=other" class="btn btn-primary link-style">Click here for details</a>
+                </div>
+            </div>
+        </div>-->
     </div>
 </div>

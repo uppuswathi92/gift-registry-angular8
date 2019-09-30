@@ -8,3 +8,19 @@
 .add-event{
 	margin:230px;
 }
+
+.no-response{
+	border: groove;
+    border-color: #4b61ff;
+    border-radius: 7px;
+}
+.attending{
+	border: groove;
+    border-color: #4b61ff;
+    border-radius: 7px;
+}
+.not-attending{
+	border: groove;
+    border-color: #4b61ff;
+    border-radius: 7px;
+}
