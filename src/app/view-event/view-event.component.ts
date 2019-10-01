@@ -86,7 +86,8 @@ export class ViewEventComponent implements OnInit {
                     this.pastEvent = true;
                 }
             } else if (response.service === "getRsvp") {
-                this.responded = response.results;
+                var results = response.results.split("-");
+                this.responded = results[0];
             } else if (response.service === "updateRsvp") {
                 this.displaySpinner = false;
                 this.responded = response.results;

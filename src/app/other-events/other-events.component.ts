@@ -142,7 +142,3 @@ host: false
     }
 
 }
-
-//doc with usecases
-//class and sequence diagram
-//source code, db folder
